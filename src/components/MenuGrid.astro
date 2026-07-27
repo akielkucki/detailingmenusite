@@ -1,0 +1,188 @@
+---
+import { Image } from "astro:assets";
+
+// Dashboard bento grid. Cards start clipped shut (see the [clip-path:...]
+// classes) and a GSAP timeline reveals them after each view transition;
+// images fade in over the semi-transparent black cards once loaded.
+//
+// On lg the grid starts at the top of the viewport: the "What is BCD?" card
+// has a notch clipped out of its top-left corner so the fixed logo sits
+// inside it, and the right column reserves a 4rem top row so the fixed
+// socials + weather tiles read as the row above Car of the Month.
+---
+<main
+    id="menu-grid"
+    class="min-h-dvh p-4 pt-[6.625rem] pb-28 sm:p-6 sm:pt-[7.125rem] lg:pt-6"
+>
+    <div class="mx-auto grid max-w-[135rem] gap-2.5 lg:h-[calc(100dvh-8.5rem)] lg:grid-cols-[1fr_42.25rem]">
+
+        <!-- Left column: large about card + two service cards -->
+        <div class="grid gap-2.5 lg:grid-rows-[1.35fr_1fr]">
+            <div class="menu-card relative min-h-[40vh] [clip-path:inset(100%_0%_0%_0%)] lg:min-h-0">
+                <a href="/about"
+                   class="group absolute inset-0 flex items-end overflow-hidden rounded-[3px] bg-black/55 lg:[clip-path:polygon(90px_0,100%_0,100%_100%,0_100%,0_90px,90px_90px)]">
+                    <figure class="img-wrap absolute inset-0 opacity-0">
+                        <Image src="https://images.pexels.com/photos/6873129/pexels-photo-6873129.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" width={1600} height={1067}
+                               class="h-full w-[106%] max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-x-[3%]"/>
+                    </figure>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30"></div>
+                    <span class="absolute top-3.5 right-3.5 grid size-8 place-items-center rounded-[3px] bg-accent text-black">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 11l1.7-4.2A2 2 0 0 1 8.6 5.5h6.8a2 2 0 0 1 1.9 1.3L19 11M5 11h14M5 11a2 2 0 0 0-2 2v3h2m14-5a2 2 0 0 1 2 2v3h-2m-14 0v2h3v-2m-3 0h14m0 0v2h-3v-2"/>
+                        </svg>
+                    </span>
+                    <div class="relative max-w-sm p-4 sm:p-5">
+                        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">What is BCD?</h2>
+                        <p class="mt-2.5 text-xs leading-relaxed text-white/85">
+                            Bucks County Detailing is where obsession meets craft. Every vehicle gets
+                            showroom-level care from detailers who genuinely love cars.
+                        </p>
+                        <svg class="mt-3 size-4 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid gap-2.5 sm:flex">
+                <a href="/interior" class="menu-card group relative flex min-h-52 flex-col overflow-hidden rounded-[3px] bg-black/55 transition-[flex-grow] duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] [clip-path:inset(100%_0%_0%_0%)] sm:flex-1 sm:hover:grow-[1.15]">
+                    <figure class="img-wrap absolute inset-0 opacity-0">
+                        <Image src="https://images.pexels.com/photos/6873100/pexels-photo-6873100.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" width={1000} height={667}
+                               class="absolute inset-0 h-full w-full max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] sm:w-[55vw] sm:group-hover:-translate-x-[3%]"/>
+                    </figure>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/40"></div>
+                    <span class="absolute top-3.5 right-3.5 grid size-8 place-items-center rounded-[3px] bg-accent text-black">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M16 5.5a3 3 0 0 1 0 5M18.5 20v-1a6 6 0 0 0-3-5.2"/>
+                        </svg>
+                    </span>
+                    <div class="relative p-4 sm:p-5">
+                        <h2 class="text-xl font-semibold tracking-tight sm:text-2xl">Interior<br/>Detailing</h2>
+                        <svg class="mt-3 size-4 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="/exterior" class="menu-card group relative flex min-h-52 flex-col overflow-hidden rounded-[3px] bg-black/55 transition-[flex-grow] duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] [clip-path:inset(100%_0%_0%_0%)] sm:flex-1 sm:hover:grow-[1.15]">
+                    <figure class="img-wrap absolute inset-0 opacity-0">
+                        <Image src="https://images.pexels.com/photos/6873010/pexels-photo-6873010.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" width={1000} height={667}
+                               class="absolute inset-0 h-full w-full max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] sm:w-[55vw] sm:group-hover:-translate-x-[3%]"/>
+                    </figure>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/40"></div>
+                    <span class="absolute top-3.5 right-3.5 grid size-8 place-items-center rounded-[3px] bg-accent text-black">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 11l1.7-4.2A2 2 0 0 1 8.6 5.5h6.8a2 2 0 0 1 1.9 1.3L19 11M5 11h14M5 11a2 2 0 0 0-2 2v3h2m14-5a2 2 0 0 1 2 2v3h-2m-14 0v2h3v-2m-3 0h14m0 0v2h-3v-2"/>
+                        </svg>
+                    </span>
+                    <div class="relative p-4 sm:p-5">
+                        <h2 class="text-xl font-semibold tracking-tight sm:text-2xl">Exterior<br/>Detailing</h2>
+                        <svg class="mt-3 size-4 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right column: reserved row for the fixed socials/weather tiles,
+             then featured car + action tiles -->
+        <div class="grid gap-2.5 lg:grid-rows-[5rem_1fr_20rem]">
+            <div class="hidden lg:block" aria-hidden="true"></div>
+
+            <a href="/car-of-the-month" class="menu-card group relative flex min-h-[40vh] flex-col overflow-hidden rounded-[3px] bg-black/55 [clip-path:inset(100%_0%_0%_0%)] lg:min-h-0">
+                <figure class="img-wrap absolute inset-0 opacity-0">
+                    <Image src="https://images.pexels.com/photos/5273165/pexels-photo-5273165.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" width={1200} height={1600}
+                           class="h-full w-[106%] max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-x-[3%]"/>
+                </figure>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/40"></div>
+                <svg class="absolute top-3.5 right-3.5 size-4 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8-6.1-3.4-6.1 3.4 1.4-6.8L2.2 9.1l6.9-.8z"/>
+                </svg>
+                <div class="relative p-4 sm:p-5">
+                    <p class="text-[11px] text-white/70">Car of the Month</p>
+                    <h2 class="mt-3 text-lg font-semibold tracking-tight">911 GT3</h2>
+                    <p class="text-[11px] text-white/70">Porsche</p>
+                </div>
+            </a>
+
+            <div class="grid grid-cols-1 gap-2.5 sm:flex">
+                <a href="/book" class="menu-card group relative flex min-h-36 flex-col justify-between rounded-[3px] bg-black/55 p-3.5 backdrop-blur-md transition-[flex-grow,background-color] duration-500 ease-out-expo [clip-path:inset(100%_0%_0%_0%)] hover:bg-black/80 sm:flex-1 sm:hover:grow-[1.35]">
+                    <span class="grid size-8 place-items-center self-right rounded-[3px] bg-accent text-black">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/>
+                        </svg>
+                    </span>
+                    <span>
+                        <span class="block text-[13px] leading-tight font-medium">Book a<br/>Detail</span>
+                        <svg class="mt-2 size-3.5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </span>
+                </a>
+                <a href="/services" class="menu-card group relative flex min-h-36 flex-col justify-between rounded-[3px] bg-black/55 p-3.5 backdrop-blur-md transition-[flex-grow,background-color] duration-500 ease-out-expo [clip-path:inset(100%_0%_0%_0%)] hover:bg-black/80 sm:flex-1 sm:hover:grow-[1.35]">
+                    <span class="grid size-8 place-items-center self-right rounded-[3px] bg-accent text-black">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/>
+                        </svg>
+                    </span>
+                    <span>
+                        <span class="block text-[13px] leading-tight font-medium">Services &amp;<br/>Pricing</span>
+                        <svg class="mt-2 size-3.5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </span>
+                </a>
+                <a href="/contact" class="menu-card group relative flex min-h-36 flex-col justify-between rounded-[3px] bg-black/55 p-3.5 backdrop-blur-md transition-[flex-grow,background-color] duration-500 ease-out-expo [clip-path:inset(100%_0%_0%_0%)] hover:bg-black/80 sm:flex-1 sm:hover:grow-[1.35]">
+                    <span class="grid size-8 place-items-center self-right rounded-[3px] bg-accent text-black">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>
+                        </svg>
+                    </span>
+                    <span>
+                        <span class="block text-[13px] leading-tight font-medium">Contact<br/>Us</span>
+                        <svg class="mt-2 size-3.5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    import gsap from "gsap";
+    import { navigate } from "astro:transitions/client";
+
+    // Runs on first load AND after every view transition onto /dashboard
+    document.addEventListener("astro:page-load", () => {
+        const grid = document.getElementById("menu-grid");
+        if (!grid) return;
+
+        gsap.timeline({ defaults: { ease: "expo.out" } })
+            .fromTo(".menu-card",
+                { clipPath: "inset(100% 0% 0% 0%)" },
+                { clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, stagger: 0.07 },
+                0,
+            )
+            .fromTo(".menu-drop",
+                { y: -20, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.08 },
+                0.15,
+            );
+
+        // Fade each image in over its semi-transparent black card once the
+        // file has actually loaded.
+        grid.querySelectorAll<HTMLImageElement>(".img-wrap img").forEach((img) => {
+            const wrap = img.closest(".img-wrap");
+            const show = () => gsap.to(wrap, { autoAlpha: 1, duration: 0.6, delay: 0.35, ease: "power2.out" });
+            if (img.complete && img.naturalWidth > 0) show();
+            else img.addEventListener("load", show, { once: true });
+        });
+    });
+
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && window.location.pathname.startsWith("/dashboard")) navigate("/");
+    });
+
+</script>

@@ -1,0 +1,80 @@
+---
+// Fixed top bar shared by all pages. The logo sits inside the 90px notch
+// clipped out of the dashboard's top-left card with a grid-gap of space; the
+// socials only render on /dashboard and drop in via GSAP (.menu-drop).
+interface Props {
+    dashboard?: boolean;
+}
+const { dashboard = false } = Astro.props;
+---
+<header class="fixed inset-x-0 top-0 z-40 p-4 sm:p-6">
+<div class="mx-auto flex max-w-[135rem] items-start justify-between gap-2.5">
+    <a href="/" transition:name="logo" class="grid h-20 w-20 shrink-0 place-items-center rounded-xl border border-white/15 bg-black/60 backdrop-blur-md" aria-label="Home">
+        <span class="text-2xl font-bold tracking-tighter">BCD</span>
+    </a>
+    <div class="flex min-w-0 items-center gap-2.5">
+        {dashboard && (
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+               class="menu-drop grid h-20 w-20 place-items-center rounded-[3px] bg-black/60 opacity-0 backdrop-blur-md transition-colors hover:bg-black/80">
+                <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>
+                </svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"
+               class="menu-drop grid h-20 w-20 place-items-center rounded-[3px] bg-black/60 opacity-0 backdrop-blur-md transition-colors hover:bg-black/80">
+                <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+            </a>
+        )}
+        <div transition:name="weather" class="flex h-20 min-w-0 items-center justify-between gap-6 rounded-[3px] bg-black/60 px-6 backdrop-blur-md sm:w-[31rem]">
+            <div class="min-w-0">
+                <p class="text-[11px] leading-tight text-white/50">Bucks County, PA</p>
+                <p class="truncate text-lg leading-snug font-medium" data-weather-cond>Partly Cloudy</p>
+            </div>
+            <div class="flex items-center gap-2 text-lg font-medium">
+                <span data-weather-temp>74°F</span>
+                <svg class="size-5 text-white/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+</header>
+
+<script>
+    // Live weather; fetched once per session, re-applied after every view
+    // transition (the header DOM is re-created on each navigation).
+    const conditions: Record<number, string> = {
+        0: "Clear", 1: "Mainly Clear", 2: "Partly Cloudy", 3: "Overcast",
+        45: "Foggy", 48: "Foggy", 51: "Drizzle", 53: "Drizzle", 55: "Drizzle",
+        61: "Light Rain", 63: "Rain", 65: "Heavy Rain", 71: "Light Snow",
+        73: "Snow", 75: "Heavy Snow", 80: "Showers", 81: "Showers",
+        82: "Heavy Showers", 95: "Thunderstorm", 96: "Thunderstorm", 99: "Thunderstorm",
+    };
+
+    let weather: { temp: string; cond: string } | null = null;
+
+    const apply = () => {
+        if (!weather) return;
+        document.querySelectorAll("[data-weather-temp]").forEach((el) => { el.textContent = weather!.temp; });
+        document.querySelectorAll("[data-weather-cond]").forEach((el) => { el.textContent = weather!.cond; });
+    };
+
+    document.addEventListener("astro:page-load", async () => {
+        if (weather) return apply();
+        try {
+            const res = await fetch(
+                "https://api.open-meteo.com/v1/forecast?latitude=40.31&longitude=-75.13&current=temperature_2m,weather_code&temperature_unit=fahrenheit",
+            );
+            const { current } = await res.json();
+            weather = {
+                temp: `${Math.round(current.temperature_2m)}°F`,
+                cond: conditions[current.weather_code] ?? "—",
+            };
+            apply();
+        } catch { /* keep static fallback */ }
+    });
+</script>

@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
+    --color-accent: #e6ff3a;
+    --color-dark-grey: #0c0c0c;
+    --ease-in-circ: cubic-bezier(0.55, 0, 1, 0.45);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+    background: #000;
+}

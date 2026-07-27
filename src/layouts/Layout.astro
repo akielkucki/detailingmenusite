@@ -1,0 +1,55 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+
+import SiteHeader from "../components/SiteHeader.astro";
+import VideoBackground from "../components/VideoBackground.astro";
+
+interface Props {
+    title?: string;
+}
+const { title = "Bucks County Detailing" } = Astro.props;
+const isDashboard = Astro.url.pathname.startsWith("/dashboard");
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <ClientRouter />
+</head>
+<body class="font-sans text-white antialiased">
+    <VideoBackground />
+    <SiteHeader dashboard={isDashboard} />
+    <slot />
+
+    <!-- Explore / Close toggle: same size + transition name on both pages, so
+         the view transition morphs one into the other in place -->
+    <a
+        href={isDashboard ? "/" : "/dashboard"}
+        transition:name="menu-toggle"
+        class="fixed bottom-14 left-1/2 z-40 flex w-52 -translate-x-1/2 cursor-pointer items-center justify-between rounded-md bg-accent px-6 py-3.5 text-sm font-medium text-black transition-all duration-300 hover:brightness-90"
+    >
+        {isDashboard ? (
+            <span>Close</span>
+            <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18"/>
+            </svg>
+        ) : (
+            <span>Explore</span>
+            <svg width="1.42em" height="1em" class="w-[17px] shrink-0" data-icon="menu">
+                <symbol id="ai:local:menu" viewBox="0 0 17 12"><path fill="currentColor" d="M.012 12v-1.5H17V12zm0-4.881v-1.5H17v1.5zm0-4.882V.74H17v1.498z"></path></symbol>
+                <use href="#ai:local:menu"></use>
+            </svg>
+        )}
+    </a>
+
+    <a href="/login" transition:name="member-login" class="fixed right-7 bottom-8 z-40 text-xs text-white/80 underline underline-offset-4 transition-colors hover:text-white">
+        Member Login
+    </a>
+</body>
+</html>
