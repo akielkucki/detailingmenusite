@@ -8,7 +8,11 @@ import VideoBackground from "../components/VideoBackground.astro";
 interface Props {
     title?: string;
 }
-const { title = "Bucks County Detailing" } = Astro.props;
+const { title = "Bucks Premium Detailing" } = Astro.props;
+// Overlay page = anything except the home hero: paused/blurred video, header
+// socials, and the pause-menu card reveal. /dashboard is the menu itself;
+// other overlay pages are its sub-pages and back out to it.
+const isHome = Astro.url.pathname === "/";
 const isDashboard = Astro.url.pathname.startsWith("/dashboard");
 ---
 <html lang="en">
@@ -24,13 +28,13 @@ const isDashboard = Astro.url.pathname.startsWith("/dashboard");
 </head>
 <body class="font-sans text-white antialiased">
     <VideoBackground />
-    <SiteHeader dashboard={isDashboard} />
+    <SiteHeader dashboard={!isHome} />
     <slot />
 
-    <!-- Explore / Close toggle: same size + transition name on both pages, so
-         the view transition morphs one into the other in place -->
+    <!-- Explore / Close / Back toggle: same size + transition name on every
+         page, so the view transition morphs one into the other in place -->
     <a
-        href={isDashboard ? "/" : "/dashboard"}
+        href={isHome ? "/dashboard" : isDashboard ? "/" : "/dashboard"}
         transition:name="menu-toggle"
         class="fixed bottom-14 left-1/2 z-40 flex w-52 -translate-x-1/2 cursor-pointer items-center justify-between rounded-md bg-accent px-6 py-3.5 text-sm font-medium text-black transition-all duration-300 hover:brightness-90"
     >
@@ -39,11 +43,16 @@ const isDashboard = Astro.url.pathname.startsWith("/dashboard");
             <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
                 <path d="M6 6l12 12M18 6L6 18"/>
             </svg>
-        ) : (
+        ) : isHome ? (
             <span>Explore</span>
             <svg width="1.42em" height="1em" class="w-[17px] shrink-0" data-icon="menu">
                 <symbol id="ai:local:menu" viewBox="0 0 17 12"><path fill="currentColor" d="M.012 12v-1.5H17V12zm0-4.881v-1.5H17v1.5zm0-4.882V.74H17v1.498z"></path></symbol>
                 <use href="#ai:local:menu"></use>
+            </svg>
+        ) : (
+            <span>Back</span>
+            <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 12H5M11 6l-6 6 6 6"/>
             </svg>
         )}
     </a>
@@ -51,5 +60,46 @@ const isDashboard = Astro.url.pathname.startsWith("/dashboard");
     <a href="/login" transition:name="member-login" class="fixed right-7 bottom-8 z-40 text-xs text-white/80 underline underline-offset-4 transition-colors hover:text-white">
         Member Login
     </a>
+
+    <script>
+        import gsap from "gsap";
+        import { navigate } from "astro:transitions/client";
+
+        // Shared pause-menu reveal: runs on first load AND after every view
+        // transition, on any page that renders .menu-card elements (the
+        // dashboard grid and each sub-page panel).
+        document.addEventListener("astro:page-load", () => {
+            if (!document.querySelector(".menu-card")) return;
+
+            gsap.timeline({ defaults: { ease: "expo.out" } })
+                .fromTo(".menu-card",
+                    { clipPath: "inset(100% 0% 0% 0%)" },
+                    { clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, stagger: 0.07 },
+                    0,
+                )
+                .fromTo(".menu-drop",
+                    { y: -20, autoAlpha: 0 },
+                    { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.08 },
+                    0.15,
+                );
+
+            // Fade each image in over its semi-transparent black card once the
+            // file has actually loaded.
+            document.querySelectorAll<HTMLImageElement>(".img-wrap img").forEach((img) => {
+                const wrap = img.closest(".img-wrap");
+                const show = () => gsap.to(wrap, { autoAlpha: 1, duration: 0.6, delay: 0.35, ease: "power2.out" });
+                if (img.complete && img.naturalWidth > 0) show();
+                else img.addEventListener("load", show, { once: true });
+            });
+        });
+
+        // Escape backs out one level: sub-page -> dashboard, dashboard -> home.
+        window.addEventListener("keydown", (e) => {
+            if (e.key !== "Escape") return;
+            const path = window.location.pathname;
+            if (path.startsWith("/dashboard")) navigate("/");
+            else if (path !== "/") navigate("/dashboard");
+        });
+    </script>
 </body>
 </html>

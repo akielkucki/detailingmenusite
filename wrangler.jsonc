@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "detailingmenusite",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-08-06",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  // Non-secret config. RESEND_API_KEY is a secret and is NOT stored here —
+  // set it with:  wrangler secret put RESEND_API_KEY
+  "vars": {
+    // Where contact form submissions are delivered.
+    "CONTACT_TO_EMAIL": "alex.kielkucki@gmail.com",
+    // Resend's shared sender works before you verify a domain, but it can only
+    // deliver to the address that owns the Resend account. Once your domain is
+    // verified in Resend, change this to e.g. "hello@buckspremiumdetailing.com".
+    "CONTACT_FROM_EMAIL": "onboarding@resend.dev"
+  }
+}

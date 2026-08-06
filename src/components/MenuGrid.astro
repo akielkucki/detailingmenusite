@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 // classes) and a GSAP timeline reveals them after each view transition;
 // images fade in over the semi-transparent black cards once loaded.
 //
-// On lg the grid starts at the top of the viewport: the "What is BCD?" card
+// On lg the grid starts at the top of the viewport: the "What is BPD?" card
 // has a notch clipped out of its top-left corner so the fixed logo sits
 // inside it, and the right column reserves a 4rem top row so the fixed
 // socials + weather tiles read as the row above Car of the Month.
@@ -22,7 +22,7 @@ import { Image } from "astro:assets";
                 <a href="/about"
                    class="group absolute inset-0 flex items-end overflow-hidden rounded-[3px] bg-black/55 lg:[clip-path:polygon(90px_0,100%_0,100%_100%,0_100%,0_90px,90px_90px)]">
                     <figure class="img-wrap absolute inset-0 opacity-0">
-                        <Image src="https://images.pexels.com/photos/6873129/pexels-photo-6873129.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" width={1600} height={1067}
+                        <Image src="https://images.pexels.com/photos/6873129/pexels-photo-6873129.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" width={1600} height={1067} loading={"eager"}
                                class="h-full w-[106%] max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-x-[3%]"/>
                     </figure>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30"></div>
@@ -32,9 +32,9 @@ import { Image } from "astro:assets";
                         </svg>
                     </span>
                     <div class="relative max-w-sm p-4 sm:p-5">
-                        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">What is BCD?</h2>
+                        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">What is BPD?</h2>
                         <p class="mt-2.5 text-xs leading-relaxed text-white/85">
-                            Bucks County Detailing is where obsession meets craft. Every vehicle gets
+                            Bucks Premium Detailing is where obsession meets craft. Every vehicle gets
                             showroom-level care from detailers who genuinely love cars.
                         </p>
                         <svg class="mt-3 size-4 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -47,7 +47,7 @@ import { Image } from "astro:assets";
             <div class="grid gap-2.5 sm:flex">
                 <a href="/interior" class="menu-card group relative flex min-h-52 flex-col overflow-hidden rounded-[3px] bg-black/55 transition-[flex-grow] duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] [clip-path:inset(100%_0%_0%_0%)] sm:flex-1 sm:hover:grow-[1.15]">
                     <figure class="img-wrap absolute inset-0 opacity-0">
-                        <Image src="https://images.pexels.com/photos/6873100/pexels-photo-6873100.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" width={1000} height={667}
+                        <Image src="https://images.pexels.com/photos/6873100/pexels-photo-6873100.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" width={1000} height={667} loading={"eager"}
                                class="absolute inset-0 h-full w-full max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] sm:w-[55vw] sm:group-hover:-translate-x-[3%]"/>
                     </figure>
                     <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/40"></div>
@@ -65,7 +65,7 @@ import { Image } from "astro:assets";
                 </a>
                 <a href="/exterior" class="menu-card group relative flex min-h-52 flex-col overflow-hidden rounded-[3px] bg-black/55 transition-[flex-grow] duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] [clip-path:inset(100%_0%_0%_0%)] sm:flex-1 sm:hover:grow-[1.15]">
                     <figure class="img-wrap absolute inset-0 opacity-0">
-                        <Image src="https://images.pexels.com/photos/6873010/pexels-photo-6873010.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" width={1000} height={667}
+                        <Image src="https://images.pexels.com/photos/6873010/pexels-photo-6873010.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" width={1000} height={667} loading={"eager"}
                                class="absolute inset-0 h-full w-full max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] sm:w-[55vw] sm:group-hover:-translate-x-[3%]"/>
                     </figure>
                     <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-black/40"></div>
@@ -89,10 +89,11 @@ import { Image } from "astro:assets";
         <div class="grid gap-2.5 lg:grid-rows-[5rem_1fr_20rem]">
             <div class="hidden lg:block" aria-hidden="true"></div>
 
-            <a href="/car-of-the-month" class="menu-card group relative flex min-h-[40vh] flex-col overflow-hidden rounded-[3px] bg-black/55 [clip-path:inset(100%_0%_0%_0%)] lg:min-h-0">
+            <!-- Still image showcase — not a link -->
+            <div class="menu-card relative flex min-h-[40vh] flex-col overflow-hidden rounded-[3px] bg-black/55 [clip-path:inset(100%_0%_0%_0%)] lg:min-h-0">
                 <figure class="img-wrap absolute inset-0 opacity-0">
-                    <Image src="https://images.pexels.com/photos/5273165/pexels-photo-5273165.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" width={1200} height={1600}
-                           class="h-full w-[106%] max-w-none object-cover transition-transform duration-[750ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-x-[3%]"/>
+                    <Image src="https://images.pexels.com/photos/5273165/pexels-photo-5273165.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" width={1200} height={1600} loading={"eager"}
+                           class="h-full w-full max-w-none object-cover"/>
                 </figure>
                 <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/40"></div>
                 <svg class="absolute top-3.5 right-3.5 size-4 fill-white" viewBox="0 0 24 24" aria-hidden="true">
@@ -103,7 +104,7 @@ import { Image } from "astro:assets";
                     <h2 class="mt-3 text-lg font-semibold tracking-tight">911 GT3</h2>
                     <p class="text-[11px] text-white/70">Porsche</p>
                 </div>
-            </a>
+            </div>
 
             <div class="grid grid-cols-1 gap-2.5 sm:flex">
                 <a href="/book" class="menu-card group relative flex min-h-36 flex-col justify-between rounded-[3px] bg-black/55 p-3.5 backdrop-blur-md transition-[flex-grow,background-color] duration-500 ease-out-expo [clip-path:inset(100%_0%_0%_0%)] hover:bg-black/80 sm:flex-1 sm:hover:grow-[1.35]">
@@ -149,40 +150,3 @@ import { Image } from "astro:assets";
         </div>
     </div>
 </main>
-
-<script>
-    import gsap from "gsap";
-    import { navigate } from "astro:transitions/client";
-
-    // Runs on first load AND after every view transition onto /dashboard
-    document.addEventListener("astro:page-load", () => {
-        const grid = document.getElementById("menu-grid");
-        if (!grid) return;
-
-        gsap.timeline({ defaults: { ease: "expo.out" } })
-            .fromTo(".menu-card",
-                { clipPath: "inset(100% 0% 0% 0%)" },
-                { clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, stagger: 0.07 },
-                0,
-            )
-            .fromTo(".menu-drop",
-                { y: -20, autoAlpha: 0 },
-                { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.08 },
-                0.15,
-            );
-
-        // Fade each image in over its semi-transparent black card once the
-        // file has actually loaded.
-        grid.querySelectorAll<HTMLImageElement>(".img-wrap img").forEach((img) => {
-            const wrap = img.closest(".img-wrap");
-            const show = () => gsap.to(wrap, { autoAlpha: 1, duration: 0.6, delay: 0.35, ease: "power2.out" });
-            if (img.complete && img.naturalWidth > 0) show();
-            else img.addEventListener("load", show, { once: true });
-        });
-    });
-
-    window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && window.location.pathname.startsWith("/dashboard")) navigate("/");
-    });
-
-</script>
