@@ -1,0 +1,121 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PagePanel from "../components/PagePanel.astro";
+import { Image } from "astro:assets";
+
+const included = [
+    "Full vacuum, including trunk and seat rails",
+    "Hot-water extraction of carpets and cloth seats",
+    "Steam cleaning of vents, cupholders, and crevices",
+    "Leather cleaned and conditioned",
+    "Interior glass cleaned streak-free",
+    "Door jambs and seals wiped and dressed",
+    "UV protectant on dash and trim",
+    "Final blacklight inspection",
+];
+
+const faqs = [
+    ["Can you get pet hair out?", "Yes — it's an add-on because it genuinely takes time, but between rubber blades, compressed air, and the extractor we get out what a vacuum never will."],
+    ["Will stains come out of my seats?", "Most food, drink, and salt stains extract completely. Dye transfer and old set-in bleach spots can be improved but not always erased — we'll tell you honestly at drop-off."],
+    ["Do you remove odors or just cover them?", "Remove. Extraction pulls out the source, steam sanitizes surfaces, and for smoke or mildew we run an ozone treatment that neutralizes odor at the molecular level."],
+];
+---
+<Layout title="Interior Detailing — Bucks County Detailing">
+    <PagePanel title="Interior Detailing" eyebrow="Services">
+        <svg slot="icon" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M16 5.5a3 3 0 0 1 0 5M18.5 20v-1a6 6 0 0 0-3-5.2"/>
+        </svg>
+
+        <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+            <div class="max-w-3xl">
+                <p class="text-base leading-relaxed text-white/85 sm:text-lg">
+                    The inside of your car is where you actually live. Our interior details
+                    go far past a vacuum and a wipe-down — every vent, seam, and stitch gets
+                    attention, and everything you touch gets properly cleaned and protected.
+                </p>
+                <p class="mt-5 text-base leading-relaxed text-white/85">
+                    We work panel by panel with dedicated brushes, dry steam, and a heated
+                    extractor, then finish with products matched to each surface — leather,
+                    alcantara, piano black, matte trim. The result isn't "cleaned"; it's
+                    reset.
+                </p>
+
+                <h2 class="mt-12 text-xl font-semibold tracking-tight sm:text-2xl">What's included</h2>
+                <ul class="mt-5 grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
+                    {included.map((item) => (
+                        <li class="flex items-start gap-3 text-base text-white/85">
+                            <svg class="mt-1 size-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+
+                <h2 class="mt-12 text-xl font-semibold tracking-tight sm:text-2xl">The process</h2>
+                <div class="mt-5 grid gap-3 sm:grid-cols-3">
+                    <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                        <p class="text-xs text-white/70">Step 1</p>
+                        <p class="mt-2 text-base font-medium">Strip &amp; extract</p>
+                        <p class="mt-2 text-sm leading-relaxed text-white/70">Everything removable comes out; carpets and upholstery get deep-extracted, not just surface-cleaned.</p>
+                    </div>
+                    <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                        <p class="text-xs text-white/70">Step 2</p>
+                        <p class="mt-2 text-base font-medium">Steam &amp; detail</p>
+                        <p class="mt-2 text-sm leading-relaxed text-white/70">Dry steam sanitizes every touchpoint; brushes and swabs handle the seams a towel can't reach.</p>
+                    </div>
+                    <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                        <p class="text-xs text-white/70">Step 3</p>
+                        <p class="mt-2 text-base font-medium">Protect &amp; finish</p>
+                        <p class="mt-2 text-sm leading-relaxed text-white/70">Leather conditioner and UV protectant lock in the result so it lasts months, not days.</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-xl font-semibold tracking-tight sm:text-2xl">Common questions</h2>
+                <div class="mt-5 space-y-3">
+                    {faqs.map(([q, a]) => (
+                        <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                            <h3 class="text-base font-medium">{q}</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-white/70">{a}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="mt-12 flex flex-wrap items-center gap-5 border-t border-white/10 pt-8">
+                    <a href="/book" class="inline-flex items-center gap-2 rounded-[3px] bg-accent px-6 py-3.5 text-base font-medium text-black transition-all hover:brightness-90">
+                        Book a Detail
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </a>
+                    <a href="/services" class="text-base text-white/80 underline underline-offset-4 transition-colors hover:text-white">See packages &amp; pricing</a>
+                </div>
+            </div>
+
+            <div class="hidden space-y-3 lg:block">
+                <figure class="img-wrap relative h-[34rem] overflow-hidden rounded-[3px] opacity-0">
+                    <Image src="https://images.pexels.com/photos/6873100/pexels-photo-6873100.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Interior detailing in progress" width={1000} height={667} loading={"eager"}
+                           class="absolute inset-0 h-full w-full object-cover"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <figcaption class="absolute bottom-5 left-5 text-sm text-white/85">Steam pass on a leather interior</figcaption>
+                </figure>
+                <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                    <h2 class="text-base font-semibold tracking-tight">Keep it that way</h2>
+                    <p class="mt-2 text-sm leading-relaxed text-white/70">
+                        Every interior detail leaves with a care card: which products are on
+                        which surfaces and what's safe to use between visits. A quarterly
+                        maintenance interior runs about half the full price.
+                    </p>
+                </div>
+                <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                    <h2 class="text-base font-semibold tracking-tight">Pairs well with</h2>
+                    <p class="mt-2 text-sm leading-relaxed text-white/70">
+                        Most clients pair interior work with an exterior wash &amp; decon —
+                        the Signature package covers both sides at a bundled rate.
+                    </p>
+                    <a href="/exterior" class="mt-3 inline-block text-sm text-white/80 underline underline-offset-4 transition-colors hover:text-white">Exterior detailing</a>
+                </div>
+            </div>
+        </div>
+    </PagePanel>
+</Layout>

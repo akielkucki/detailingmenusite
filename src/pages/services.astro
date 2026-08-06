@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PagePanel from "../components/PagePanel.astro";
+
+const packages = [
+    {
+        name: "Essential",
+        price: "$149",
+        note: "The proper maintenance detail",
+        features: [
+            "Two-bucket hand wash & dry",
+            "Wheels, tires & wells cleaned",
+            "Full interior vacuum",
+            "Interior wipe-down & glass",
+            "Tire dressing",
+        ],
+        featured: false,
+    },
+    {
+        name: "Signature",
+        price: "$249",
+        note: "Our most-booked package",
+        features: [
+            "Everything in Essential",
+            "Iron decon + clay bar",
+            "One-step machine polish",
+            "Carpet & seat extraction",
+            "Leather cleaned & conditioned",
+            "6-month paint sealant",
+        ],
+        featured: true,
+    },
+    {
+        name: "Showroom",
+        price: "$449",
+        note: "Full correction, inside and out",
+        features: [
+            "Everything in Signature",
+            "Multi-stage paint correction",
+            "Steam-cleaned vents & seams",
+            "Engine bay detail",
+            "12-month ceramic sealant",
+            "Before / after photo set",
+        ],
+        featured: false,
+    },
+];
+
+const addons = [
+    ["Pet hair removal", "$40+"],
+    ["Engine bay detail", "$50"],
+    ["Ozone odor treatment", "$60"],
+    ["Headlight restoration", "$80"],
+    ["Ceramic coating (2yr)", "$599+"],
+    ["Ceramic coating (5yr)", "$999+"],
+];
+
+const faqs = [
+    ["Which package should I pick?", "If the car gets regular care, Essential keeps it that way. If it's been a while — or the paint feels rough and the seats have stories — Signature is the reset button. Showroom is for when you want it genuinely better than new."],
+    ["Do you offer maintenance plans?", "Yes. After any Signature or Showroom detail you can lock in a monthly or quarterly Essential at a returning-client rate. Cars we maintain also skip the condition surcharge."],
+    ["How do I pay?", "Card, cash, or Apple Pay at pickup. Ceramic coating work takes a 25% deposit at booking; everything else is pay-when-you're-happy."],
+];
+---
+<Layout title="Services & Pricing — Bucks County Detailing">
+    <PagePanel title="Services & Pricing" eyebrow="Packages">
+        <svg slot="icon" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/>
+        </svg>
+
+        <p class="max-w-3xl text-base leading-relaxed text-white/85 sm:text-lg">
+            Three packages, honestly scoped. Every one includes a walkaround before and
+            after the detail, and we'll always tell you if a cheaper package gets your
+            car the same result.
+        </p>
+
+        <div class="mt-8 grid gap-3 lg:grid-cols-3">
+            {packages.map((pkg) => (
+                <div class:list={[
+                    "relative flex flex-col rounded-[3px] border p-7",
+                    pkg.featured ? "border-accent/60 bg-black/60" : "border-white/10 bg-black/40",
+                ]}>
+                    {pkg.featured && (
+                        <span class="absolute top-5 right-5 rounded-[3px] bg-accent px-2.5 py-1 text-[11px] font-semibold text-black uppercase">Popular</span>
+                    )}
+                    <p class="text-xs text-white/70">{pkg.note}</p>
+                    <h2 class="mt-1.5 text-2xl font-semibold tracking-tight">{pkg.name}</h2>
+                    <p class="mt-4 text-4xl font-semibold tracking-tight text-accent">{pkg.price}</p>
+                    <ul class="mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
+                        {pkg.features.map((f) => (
+                            <li class="flex items-start gap-3 text-base text-white/85">
+                                <svg class="mt-1 size-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                {f}
+                            </li>
+                        ))}
+                    </ul>
+                    <a href="/book" class:list={[
+                        "mt-7 inline-flex items-center justify-between rounded-[3px] px-5 py-3 text-base font-medium transition-all",
+                        pkg.featured ? "bg-accent text-black hover:brightness-90" : "border border-white/20 text-white hover:bg-white/10",
+                    ]}>
+                        Book {pkg.name}
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17L17 7M8 7h9v9"/>
+                        </svg>
+                    </a>
+                </div>
+            ))}
+        </div>
+
+        <h2 class="mt-12 text-xl font-semibold tracking-tight sm:text-2xl">Add-ons</h2>
+        <p class="mt-2 text-sm text-white/70">Available with any package. Pricing varies with vehicle size and condition.</p>
+        <div class="mt-5 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {addons.map(([name, price]) => (
+                <div class="flex items-center justify-between rounded-[3px] border border-white/10 bg-black/40 px-5 py-4">
+                    <span class="text-base text-white/85">{name}</span>
+                    <span class="text-base font-medium text-accent">{price}</span>
+                </div>
+            ))}
+        </div>
+
+        <h2 class="mt-12 text-xl font-semibold tracking-tight sm:text-2xl">Common questions</h2>
+        <div class="mt-5 grid max-w-4xl gap-3">
+            {faqs.map(([q, a]) => (
+                <div class="rounded-[3px] border border-white/10 bg-black/40 p-6">
+                    <h3 class="text-base font-medium">{q}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-white/70">{a}</p>
+                </div>
+            ))}
+        </div>
+
+        <p class="mt-10 max-w-3xl border-t border-white/10 pt-8 text-sm leading-relaxed text-white/50">
+            Prices shown are for sedans and coupes in average condition. SUVs, trucks, and
+            heavily soiled vehicles are quoted at drop-off. Every package includes a
+            walkaround before and after the detail.
+        </p>
+    </PagePanel>
+</Layout>
