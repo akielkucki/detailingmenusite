@@ -23,8 +23,8 @@ const packages = [
         features: [
             "Everything in Essential",
             "Iron decon + clay bar",
-            "One-step machine polish",
-            "Carpet & seat extraction",
+            "Bug and tar removal",
+            "Carpets agitated & spot-treated",
             "Leather cleaned & conditioned",
             "6-month paint sealant",
         ],
@@ -33,13 +33,13 @@ const packages = [
     {
         name: "Showroom",
         price: "$449",
-        note: "Full correction, inside and out",
+        note: "Every surface, inside and out",
         features: [
             "Everything in Signature",
-            "Multi-stage paint correction",
+            "Wheels-off barrel cleaning",
             "Steam-cleaned vents & seams",
             "Engine bay detail",
-            "12-month ceramic sealant",
+            "Glass sealed inside and out",
             "Before / after photo set",
         ],
         featured: false,
@@ -51,17 +51,18 @@ const addons = [
     ["Engine bay detail", "$50"],
     ["Ozone odor treatment", "$60"],
     ["Headlight restoration", "$80"],
-    ["Ceramic coating (2yr)", "$599+"],
-    ["Ceramic coating (5yr)", "$999+"],
+    ["Wheels-off deep clean", "$90"],
+    ["Interior UV protection", "$45"],
 ];
 
 const faqs = [
-    ["Which package should I pick?", "If the car gets regular care, Essential keeps it that way. If it's been a while — or the paint feels rough and the seats have stories — Signature is the reset button. Showroom is for when you want it genuinely better than new."],
+    ["Which package should I pick?", "If the car gets regular care, Essential keeps it that way. If it's been a while — or the paint feels rough and the seats have stories — Signature is the reset button. Showroom is for when you want every surface touched."],
     ["Do you offer maintenance plans?", "Yes. After any Signature or Showroom detail you can lock in a monthly or quarterly Essential at a returning-client rate. Cars we maintain also skip the condition surcharge."],
-    ["How do I pay?", "Card, cash, or Apple Pay at pickup. Ceramic coating work takes a 25% deposit at booking; everything else is pay-when-you're-happy."],
+    ["Do you do paint correction or ceramic coatings?", "No. We focus on washing, decontamination, and protection, and we'd rather do that properly than offer services we can't stand behind. If your paint needs correction, we'll happily point you to a shop that specializes in it."],
+    ["How do I pay?", "Card, cash, or Apple Pay at pickup. No deposit required — it's pay-when-you're-happy."],
 ];
 ---
-<Layout title="Services & Pricing — Bucks County Detailing">
+<Layout title="Services & Pricing — Bucks Premium Detailing">
     <PagePanel title="Services & Pricing" eyebrow="Packages">
         <svg slot="icon" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/>

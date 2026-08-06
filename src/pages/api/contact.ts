@@ -68,13 +68,13 @@ export const POST: APIRoute = async ({ request }) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            from: `BCD Website <${CONTACT_FROM_EMAIL ?? "onboarding@resend.dev"}>`,
+            from: `BPD Website <${CONTACT_FROM_EMAIL ?? "onboarding@resend.dev"}>`,
             to: [CONTACT_TO_EMAIL ?? "alex.kielkucki@gmail.com"],
             reply_to: email,
             subject: `New contact form message from ${name}`,
             text: `From: ${name} <${email}>\n\n${message}`,
             html: `
-                <h2>New message from the BCD site</h2>
+                <h2>New message from the BPD site</h2>
                 <p><strong>Name:</strong> ${escapeHtml(name)}</p>
                 <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
                 <hr>
